@@ -9,9 +9,10 @@
 
 #include <stdio.h>
 #include <limits.h>
+#include <unistd.h> // Needed for close, dup, dup2
 #include "ft_printf.h"
 
-// Visualizing the output to easily identify failures.
+// Formatting the output to make errors easier to spot
 #define RESET   "\033[0m"
 #define RED     "\033[1;31m"
 #define GREEN   "\033[1;32m"
@@ -105,7 +106,13 @@ int main(void)
     TEST("COMBO 1", "%c %s %p %d %i %u %x %X %%", 'Z', "Mix", ptr, INT_MAX, INT_MIN, UINT_MAX, INT_MAX, INT_MAX);
     TEST("COMBO 2", "Test %s %d", "string", 0);
 
-    // --- 8. The Impossible Test (FD 1 Closed) ---
+    // --- 8. Invalid Format Specifiers (Undefined Behavior) ---
+    // Standard printf usually prints "%k", but my code might just swallow it.
+    // This mismatch is expected unless I specifically handled unknown flags.
+    TEST("INVALID 1", "This is invalid: %k");
+    TEST("INVALID 2", "Multiple invalid: %w %r %y");
+
+    // --- 9. The Impossible Test (FD 1 Closed) ---
     // This simulates a write error. Real printf returns -1.
     // If I didn't check write() return values, I will fail this.
     g_tests_total++;
