@@ -12,25 +12,25 @@
 
 #include "ft_printf.h"
 
-int	ft_formats(va_list args, char format)
+int	ft_formats(va_list *args, char format)
 {
 	int	len;
 
 	len = 0;
 	if (format == 'c')
-		len += ft_putchar(va_arg(args, int));
+		len += ft_putchar(va_arg(*args, int));
 	else if (format == 's')
-		len += ft_putstr(va_arg(args, char *));
+		len += ft_putstr(va_arg(*args, char *));
 	else if (format == 'p')
-		len += ft_putptr(va_arg(args, void *));
+		len += ft_putptr(va_arg(*args, void *));
 	else if (format == 'd' || format == 'i')
-		len += ft_putnbr(va_arg(args, int));
+		len += ft_putnbr(va_arg(*args, int));
 	else if (format == 'u')
-		len += ft_putnbr_unsigned(va_arg(args, unsigned int));
+		len += ft_putnbr_unsigned(va_arg(*args, unsigned int));
 	else if (format == 'x')
-		len += ft_puthex(va_arg(args, unsigned int), 'x');
+		len += ft_puthex(va_arg(*args, unsigned int), 'x');
 	else if (format == 'X')
-		len += ft_puthex(va_arg(args, unsigned int), 'X');
+		len += ft_puthex(va_arg(*args, unsigned int), 'X');
 	else if (format == '%')
 		len += ft_putchar('%');
 	return (len);
@@ -50,7 +50,9 @@ int	ft_printf(const char *s, ...)
 		if (s[i] == '%')
 		{
 			i++;
-			len += ft_formats(args, s[i]);
+			if (!s[i])
+				break ;
+			len += ft_formats(&args, s[i]);
 		}
 		else
 			len += ft_putchar(s[i]);
