@@ -16,6 +16,8 @@
 
 * Hamid
 * tchatgbt
+* <https://www.youtube.com/watch?v=SHiIqmebuKg>
+
 
 ```c
 int hamid(char *hamid)
