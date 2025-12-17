@@ -1,4 +1,4 @@
-*This project has been created as part of the 42 curriculum by oused-da.*
+*This project has been created as part of the 42 curriculum by **oused-da***
 
 # ft_printf
 
@@ -70,6 +70,7 @@ cc main.c libftprintf.a -o ft_printf
 * `man printf`: The standard manual page for printf behavior
 * `man 3 stdarg`: Manual page for variable argument lists
 * [C Library - <stdarg.h>](https://www.tutorialspoint.com/c_standard_library/stdarg_h.htm): Documentation on variadic macros.
+* [Oceano](https://youtu.be/7Sph8JlRo0g) Youtube vedio explaining variadic functions
 2. AI Usage:
 AI tools (Gemini) were used in the development of this project for the following tasks:
 * **Concept Explanation**: To gain a deeper understanding of variadic functions, specifically the underlying mechanisms of the Stack, CPU Registers, and how va_list interacts with system calling conventions
