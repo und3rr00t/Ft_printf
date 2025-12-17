@@ -70,7 +70,7 @@ Example `main.c`:
 int main()
 {
     ft_printf("Hello, %s! The number is %d.\n", "World", 42);
-    ft_printf("Hex: %x, Ptr: %p\n", 255, (void *)0x1234);
+    ft_printf("Hex: %x, Ptr: %p\n", 255, "ptr");
 }
 ```
 Compiling with your code:
