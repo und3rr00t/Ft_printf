@@ -12,49 +12,45 @@
 
 #include "ft_printf.h"
 
-int	ft_putchar(char c)
+void	ft_putchar(char c, int *len)
 {
-	write(1, &c, 1);
-	return (1);
+	if (*len == -1)
+		return ;
+	if (write(1, &c, 1) == -1)
+		*len = -1;
+	else
+		*len += 1;
 }
 
-int	ft_putstr(char *s)
+void	ft_putstr(char *s, int *len)
 {
 	int	i;
 
 	i = 0;
 	if (!s)
-		return (ft_putstr("(null)"));
+		return (ft_putstr("(null)", len));
 	while (s[i])
-		ft_putchar(s[i++]);
-	return (i);
+		ft_putchar(s[i++], len);
 }
 
-int	ft_putnbr_unsigned(unsigned int n)
+void	ft_putnbr_unsigned(unsigned int n, int *len)
 {
-	int	len;
-
-	len = 0;
 	if (n > 9)
-		len += ft_putnbr_unsigned(n / 10);
-	len += ft_putchar((n % 10) + 48);
-	return (len);
+		ft_putnbr_unsigned(n / 10, len);
+	ft_putchar((n % 10) + 48, len);
 }
 
-int	ft_putnbr(int n)
+void	ft_putnbr(int n, int *len)
 {
 	long int	nb;
-	int			len;
 
-	len = 0;
 	nb = n;
 	if (nb < 0)
 	{
-		len += ft_putchar('-');
+		ft_putchar('-', len);
 		nb = -nb;
 	}
 	if (nb > 9)
-		len += ft_putnbr(nb / 10);
-	len += ft_putchar((nb % 10) + 48);
-	return (len);
+		ft_putnbr(nb / 10, len);
+	ft_putchar((nb % 10) + 48, len);
 }

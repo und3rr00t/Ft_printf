@@ -16,12 +16,12 @@
 # include <unistd.h>
 # include <stdarg.h>
 
-int	ft_printf(const char *s, ...);
-int	ft_putchar(char c);
-int	ft_putstr(char *s);
-int	ft_putnbr(int n);
-int	ft_putnbr_unsigned(unsigned int n);
-int	ft_putptr(void *ptr);
-int	ft_puthex(unsigned long n, char format);
+int		ft_printf(const char *s, ...);
+void	ft_putchar(char c, int *len);
+void	ft_putstr(char *s, int *len);
+void	ft_putnbr(int n, int *len);
+void	ft_putnbr_unsigned(unsigned int n, int *len);
+void	ft_putptr(void *ptr, int *len);
+void	ft_puthex(unsigned long n, char format, int *len);
 
 #endif

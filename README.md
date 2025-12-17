@@ -30,7 +30,21 @@ It handles the following conversions:
 This project utilizes the `<stdarg.h>` library to handle variadic arguments:
 * `va_start`: Initializes the argument list
 * `va_arg`: Retrieves the next argument in the list based on the specified type
-* `va_end`: Cleans up the memory associated with the argument list.
+* `va_end`: Cleans up the memory associated with the argument list
+
+### Algorithm
+The core logic follows a single-pass parsing strategy:
+1. **Initialize** `va_list` to handle variadic arguments.
+2. **Iterate** through the format string:
+   - If a standard character is found, write it to the output.
+   - If a `%` is found, parse the next character to determine the format specifier.
+3. **Dispatch** the argument to specific helper functions (`ft_putstr`, `ft_putnbr`, etc.) based on the specifier.
+4. **Track** the number of characters printed using a pointer (`int *len`) passed to all sub-functions.
+5. **Return** the total length printed or `-1` if a write error occurs.
+
+### Design Choices
+* **Pointer to Length (`int *len`)**: I chose to pass a pointer to the length counter across all functions. This allows for centralized error handling (setting `*len = -1` on write failure) and simplifies the accumulation of the return value
+* **Recursion for Numbers**: Integer and Hexadecimal conversions use recursion. This avoids the need for dynamic memory allocation (`malloc`) or temporary buffers, making the library more lightweight and memory-safe
 
 ## Instructions
 

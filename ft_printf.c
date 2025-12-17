@@ -12,44 +12,29 @@
 
 #include "ft_printf.h"
 
-int	ft_formats(va_list *args, char format)
+void	ft_formats(va_list *args, char format, int *len)
 {
-	int	len;
-
-	len = 0;
 	if (format == 'c')
-		len += ft_putchar(va_arg(*args, int));
+		ft_putchar(va_arg(*args, int), len);
 	else if (format == 's')
-		len += ft_putstr(va_arg(*args, char *));
+		ft_putstr(va_arg(*args, char *), len);
 	else if (format == 'p')
-		len += ft_putptr(va_arg(*args, void *));
+		ft_putptr(va_arg(*args, void *), len);
 	else if (format == 'd' || format == 'i')
-		len += ft_putnbr(va_arg(*args, int));
+		ft_putnbr(va_arg(*args, int), len);
 	else if (format == 'u')
-		len += ft_putnbr_unsigned(va_arg(*args, unsigned int));
+		ft_putnbr_unsigned(va_arg(*args, unsigned int), len);
 	else if (format == 'x')
-		len += ft_puthex(va_arg(*args, unsigned int), 'x');
+		ft_puthex(va_arg(*args, unsigned int), 'x', len);
 	else if (format == 'X')
-		len += ft_puthex(va_arg(*args, unsigned int), 'X');
+		ft_puthex(va_arg(*args, unsigned int), 'X', len);
 	else if (format == '%')
-		len += ft_putchar('%');
-	return (len);
-}
-
-int	format_check(char c)
-{
-	char	*format;
-	int		i;
-
-	format = "cspdiuxX%";
-	i = 0;
-	while (format[i])
+		ft_putchar('%', len);
+	else
 	{
-		if (format[i] == c)
-			return (1);
-		i++;
+		ft_putchar('%', len);
+		ft_putchar(format, len);
 	}
-	return (0);
 }
 
 int	ft_printf(const char *s, ...)
@@ -58,20 +43,19 @@ int	ft_printf(const char *s, ...)
 	int		i;
 	int		len;
 
+	if (!s)
+		return (-1);
 	i = 0;
 	len = 0;
 	va_start(args, s);
 	while (s[i])
 	{
-		if (s[i] == '%' && s[i + 1] && format_check(s[i + 1]))
-		{
-			len += ft_formats(&args, s[i + 1]);
-			i++;
-		}
+		if (len == -1)
+			break ;
+		if (s[i] == '%' && s[i + 1])
+			ft_formats(&args, s[++i], &len);
 		else if (s[i] != '%')
-			len += ft_putchar(s[i]);
-		else if (s[i + 1])
-			len += ft_putchar(s[i]);
+			ft_putchar(s[i], &len);
 		i++;
 	}
 	va_end(args);
