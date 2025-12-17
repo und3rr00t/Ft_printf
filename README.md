@@ -28,9 +28,9 @@ It handles the following conversions:
 2. Technical Details:
 
 This project utilizes the `<stdarg.h>` library to handle variadic arguments:
-    * `va_start`: Initializes the argument list
-    * `va_arg`: Retrieves the next argument in the list based on the specified type
-    * `va_end`: Cleans up the memory associated with the argument list.
+* `va_start`: Initializes the argument list
+* `va_arg`: Retrieves the next argument in the list based on the specified type
+* `va_end`: Cleans up the memory associated with the argument list.
 
 ## Instructions
 
@@ -67,10 +67,10 @@ cc main.c libftprintf.a -o ft_printf
 ## Resources:
 
 1. References:
-    * `man printf`: The standard manual page for printf behavior
-    * `man 3 stdarg`: Manual page for variable argument lists
-    * [C Library - <stdarg.h>](https://www.tutorialspoint.com/c_standard_library/stdarg_h.htm): Documentation on variadic macros.
+* `man printf`: The standard manual page for printf behavior
+* `man 3 stdarg`: Manual page for variable argument lists
+* [C Library - <stdarg.h>](https://www.tutorialspoint.com/c_standard_library/stdarg_h.htm): Documentation on variadic macros.
 2. AI Usage:
 AI tools (Gemini) were used in the development of this project for the following tasks:
-    * **Concept Explanation**: To gain a deeper understanding of variadic functions, specifically the underlying mechanisms of the Stack, CPU Registers, and how va_list interacts with system calling conventions
-    * **Testing**: To generate comprehensive test cases, including edge cases and comparisons against the standard printf behavior to ensure accuracy
+* **Concept Explanation**: To gain a deeper understanding of variadic functions, specifically the underlying mechanisms of the Stack, CPU Registers, and how va_list interacts with system calling conventions
+* **Testing**: To generate comprehensive test cases, including edge cases and comparisons against the standard printf behavior to ensure accuracy
